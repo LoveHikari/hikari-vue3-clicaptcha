@@ -145,6 +145,10 @@ do=check&info={coordinates};{width};{height}
 └── README.md
 ```
 
+##  3. 后端环境参考
+
+移步至 [hikari_clicaptcha_server](https://github.com/LoveHikari/hikari_clicaptcha_server) 项目
+
 ## 浏览器兼容性
 
 - Chrome (推荐)
