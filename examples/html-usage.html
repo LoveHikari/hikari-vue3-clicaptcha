@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Clicaptcha HTML 使用示例</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/qs/dist/qs.min.js"></script>
+    <!-- 引入组件的UMD版本 -->
+    <script src="../dist/hikari-vue3-clicaptcha.umd.cjs"></script>
+    <link rel="stylesheet" href="../dist/hikari-vue3-clicaptcha.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Vue Clicaptcha HTML 使用示例</h1>
+        <button @click="showCaptcha">显示验证码</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            setup() {
+                const showCaptcha = () => {
+                    // 调用验证码组件
+                    const captcha = VueClicaptcha({
+                        src: 'https://your-api-url/captcha',
+                        success: '验证成功！',
+                        error: '验证失败，请重试！',
+                        callback: () => {
+                            document.getElementById('message').innerHTML = '<p style="color: green;">验证码验证成功！</p>';
+                            // 执行后续操作
+                        }
+                    });
+
+                    // 监听事件（可选）
+                    captcha.$on('success', () => {
+                        console.log('验证成功');
+                    });
+
+                    captcha.$on('error', () => {
+                        console.log('验证失败');
+                    });
+                };
+
+                return {
+                    showCaptcha
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
